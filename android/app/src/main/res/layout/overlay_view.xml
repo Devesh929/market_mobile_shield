@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <!-- The Floating Bubble -->
+    <FrameLayout
+        android:id="@+id/bubble_container"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/circle_background"
+        android:elevation="8dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="🛡️"
+            android:textSize="32sp" />
+    </FrameLayout>
+
+    <!-- The Verdict Card (Hidden by default) -->
+    <LinearLayout
+        android:id="@+id/card_container"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:elevation="12dp"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="72dp">
+        
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Analyzing Context..."
+            android:textColor="#0B1F33"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Risk Score: 95 (Critical)"
+            android:textColor="#DC2626"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+            
+        <TextView
+            android:id="@+id/tv_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="High Risk: Unregistered advisor matching known Dabba Trading patterns."
+            android:textColor="#64748B"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dismiss"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#00A7A7"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+</FrameLayout>
