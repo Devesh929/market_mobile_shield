@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="8dp">
 
     <!-- The Floating Bubble -->
     <FrameLayout
         android:id="@+id/bubble_container"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:background="@drawable/circle_background"
         android:elevation="8dp">
-        
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="🛡️"
-            android:textSize="32sp" />
+            android:text="🛡"
+            android:textSize="28sp" />
     </FrameLayout>
 
     <!-- The Verdict Card (Hidden by default) -->
@@ -28,45 +27,127 @@
         android:orientation="vertical"
         android:background="#FFFFFF"
         android:elevation="12dp"
-        android:padding="16dp"
         android:visibility="gone"
-        android:layout_marginTop="72dp">
+        android:layout_marginTop="64dp">
         
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Analyzing Context..."
-            android:textColor="#0B1F33"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Risk Score: 95 (Critical)"
-            android:textColor="#DC2626"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
-            
-        <TextView
-            android:id="@+id/tv_action"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="High Risk: Unregistered advisor matching known Dabba Trading patterns."
-            android:textColor="#64748B"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:background="#0B1F33"
+            android:padding="16dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market Shield Analysis"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_close"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dismiss"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#00A7A7"
-            android:layout_marginTop="16dp"/>
+            android:padding="16dp">
+
+            <!-- Pre-Analyze State -->
+            <LinearLayout
+                android:id="@+id/state_initial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Target locked. Tap Analyze to deeply scan the current visual and audio context for market manipulation traces."
+                    android:textColor="#475569"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="16dp"/>
+                <Button
+                    android:id="@+id/btn_analyze"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Deep Scan Content"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#00A7A7"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+
+            <!-- Spinner State -->
+            <LinearLayout
+                android:id="@+id/state_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone">
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:indeterminateTint="#00A7A7"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Analyzing Content..."
+                    android:textColor="#0B1F33"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
+
+            <!-- Results State -->
+            <LinearLayout
+                android:id="@+id/state_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Dynamic Metrics Container (We'll populate this from Kotlin) -->
+                <LinearLayout
+                    android:id="@+id/metrics_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- Metrics will be injected here programmatically -->
+                </LinearLayout>
+
+                <!-- Detailed Text -->
+                <LinearLayout
+                    android:id="@+id/text_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F8FAFC"
+                    android:padding="12dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+                    <View
+                        android:id="@+id/text_border"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="#DC2626"/>
+                    <TextView
+                        android:id="@+id/tv_analysis_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Close Panel"
+                    android:textColor="#475569"
+                    android:backgroundTint="#E2E8F0"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
-
 </FrameLayout>

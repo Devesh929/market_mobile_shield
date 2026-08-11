@@ -33,13 +33,27 @@ class OverlayModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
 
     @ReactMethod
     fun startOverlay() {
-        val intent = Intent(reactApplicationContext, OverlayService::class.java)
-        reactApplicationContext.startService(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(reactApplicationContext)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + reactApplicationContext.packageName)
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            reactApplicationContext.startActivity(intent)
+        } else {
+            val serviceIntent = Intent(reactApplicationContext, OverlayService::class.java)
+            reactApplicationContext.startService(serviceIntent)
+        }
     }
 
     @ReactMethod
     fun stopOverlay() {
-        val intent = Intent(reactApplicationContext, OverlayService::class.java)
-        reactApplicationContext.stopService(intent)
+        val serviceIntent = Intent(reactApplicationContext, OverlayService::class.java)
+        reactApplicationContext.stopService(serviceIntent)
+    }
+
+    @ReactMethod
+    fun resetDemoCounter() {
+        OverlayService.demoStepCounter = 0
     }
 }

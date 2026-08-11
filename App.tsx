@@ -32,6 +32,10 @@ function App(): React.JSX.Element {
     setOverlayActive(!overlayActive);
   };
 
+  const resetDemo = () => {
+    OverlayModule.resetDemoCounter();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -45,7 +49,7 @@ function App(): React.JSX.Element {
           To draw over YouTube, Instagram, or Telegram, the app requires the 'Display over other apps' permission.
         </Text>
         <TouchableOpacity style={styles.button} onPress={requestPermission}>
-          <Text style={styles.buttonText}>Request Permission</Text>
+          <Text style={styles.buttonText}>1. Request Permission</Text>
         </TouchableOpacity>
         {permissionGranted && <Text style={styles.success}>Permission Granted!</Text>}
       </View>
@@ -63,6 +67,19 @@ function App(): React.JSX.Element {
           <Text style={styles.buttonText}>
             {overlayActive ? "Stop Overlay" : "Start Overlay"}
           </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>3. Reset Presentation</Text>
+        <Text style={styles.cardBody}>
+          Click this before each demo presentation to reset the sequence back to Step 1 (YouTube Long).
+        </Text>
+        <TouchableOpacity 
+          style={[styles.button, { backgroundColor: '#F59E0B' }]} 
+          onPress={resetDemo}
+        >
+          <Text style={styles.buttonText}>Reset Demo Counter</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
